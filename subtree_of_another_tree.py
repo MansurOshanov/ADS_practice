@@ -6,28 +6,41 @@
 #         self.right = right
 class Solution:
     def isSubtree(self, root: TreeNode, subRoot: TreeNode) -> bool:
+        '''
+        BFS traversal
+        '''
+#         if root is None:
+#             if subRoot is None:
+#                 return True
+#             return False
         
+#         queue = collections.deque()
+#         queue.append(root)
+        
+#         while(queue):
+#             size = len(queue)
+#             for i in range(size):
+#                 node = queue.popleft()
+#                 if self.isSameTree(node, subRoot):
+#                     return True
+                
+#                 if node.left:
+#                     queue.append(node.left)
+#                 if node.right:
+#                     queue.append(node.right)
+                
+#         return False
+
+        '''
+        DFS traversal
+        '''
         if root is None:
-            if subRoot is None:
-                return True
             return False
         
-        queue = collections.deque()
-        queue.append(root)
+        if self.isSameTree(root, subRoot):
+            return True
+        return self.isSubtree(root.left, subRoot) or self.isSubtree(root.right, subRoot)
         
-        while(queue):
-            size = len(queue)
-            for i in range(size):
-                node = queue.popleft()
-                if self.isSameTree(node, subRoot):
-                    return True
-                
-                if node.left:
-                    queue.append(node.left)
-                if node.right:
-                    queue.append(node.right)
-                
-        return False
     
     def isSameTree(self, root, subRoot):
         if root is None or subRoot is None:
